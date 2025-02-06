@@ -1,5 +1,6 @@
 import React,{ useEffect, useState } from "react"
 import todolistService from "../services/todolist/todolist.service";
+import InputText from "./InputText";
 
 export default function Todolist() {
     const [todoList, setTodolist] = useState([]);
@@ -10,10 +11,20 @@ export default function Todolist() {
             setTodolist(data);
         })
     },[]);
-
+    const addTodoList = (newLibelle)=>{
+        todolistService.insertTodoList(newLibelle).then((response)=>{
+            todolistService.getTodoList().then((response)=>{
+                let data = response.data; 
+                setTodolist(data);
+            });
+        });
+    }
     return (
         <div className="">
-            <div className="mt-3 " style={{width:450+'px'}}>
+            <div style={{display:'flex'}}>
+                <InputText onAddItem={addTodoList}/>
+            </div>
+            <div className="" style={{width:'450px',marginTop:'20px'}}>
                 {todoList.map( todo =>
                     <li key={todo._id}  
                         style={{

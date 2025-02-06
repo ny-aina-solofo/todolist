@@ -21,12 +21,17 @@ const insertTodoList = async (req,res,next) => {
         )
     }
     res.status(200).send({success:true});
-} 
-
+}
+const deleteTodoList = async (req,res,next) => {
+    const id_todo = req.params.id;
+    await Todolist.deleteOne({_id : id_todo });
+    res.status(200).send({success:true});    
+}
 
 module.exports = {
     getTodoList,
-    insertTodoList
+    insertTodoList,
+    deleteTodoList
 }
 
 

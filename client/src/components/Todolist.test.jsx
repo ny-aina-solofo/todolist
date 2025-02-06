@@ -13,6 +13,7 @@ const todo = [
 const MockTodolist = () => {
     todolistService.getTodoList.mockResolvedValue({ data : todo });
     todolistService.insertTodoList.mockResolvedValue({ success : true });
+    todolistService.deleteTodoList.mockResolvedValue({ success : true });
 	return (
         <Todolist/>
     );
@@ -34,6 +35,18 @@ describe("Todolist component testing", () => {
         expect(input.value).toBe("watch Mission Impossible Rogue Nation");
         fireEvent.click(button);
         expect(todolistService.insertTodoList).toHaveBeenCalledWith("watch Mission Impossible Rogue Nation");    
+    });
+
+    it("delete todolist",async()=>{
+        render(<MockTodolist/>)
+        // Attendre que la liste soit affichée
+        await waitFor(() => {
+            expect(screen.getByText("Sleep for 1 hour")).toBeInTheDocument();
+        });
+        const deleteButton = screen.getAllByText('x');
+        fireEvent.click(deleteButton[0]);
+        expect(todolistService.deleteTodoList).toHaveBeenCalledWith("67a1beef2b664bd6f5338b15");
+        expect(screen.queryByText('Sleep for 1 hour')).toBeNull(); // vérifier que l'élément n'est plus affiché dans le DOM
     });
 
 });

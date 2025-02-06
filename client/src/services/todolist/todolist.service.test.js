@@ -10,6 +10,8 @@ vi.mock('../http_common', () => {
         default: {
             get: vi.fn(),
             post: vi.fn(),
+            delete: vi.fn(),
+            put: vi.fn()
         },
     };
 });
@@ -39,5 +41,12 @@ describe("http service test", () => {
         http.post.mockResolvedValue({ success: true });
         await todolistService.insertTodoList(newLibelle);
         expect(http.post).toHaveBeenCalledWith('/insert-todo', { libelle: newLibelle });
+    });
+
+    it("delete todo", async () => {
+        const _id = '67a1beef2b664bd6f5338b15';
+        http.delete.mockResolvedValue({ success: true });
+        await todolistService.deleteTodoList(_id);
+        expect(http.delete).toHaveBeenCalledWith(`/delete-todo/${_id}`);
     });
 });

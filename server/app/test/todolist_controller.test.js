@@ -1,4 +1,4 @@
-const { getTodoList,insertTodoList } = require("../controllers/todolist_controller");
+const todolistController = require("../controllers/todolist_controller");
 const db = require("../models/model");
 const httpMocks = require('node-mocks-http');
 
@@ -7,7 +7,7 @@ jest.mock("../models/model", () => ({
         find: jest.fn(),
         aggregate : jest.fn(),
         create: jest.fn(),
-
+        deleteOne: jest.fn()
     },
 }));
 
@@ -23,7 +23,7 @@ describe('Todolist controller',()=>{
             done: false, rang: '1',__v: 0
         }]
         db.todolist.find.mockResolvedValue(data); // Simulation du comportement de `Todolist.find()`
-        await getTodoList(req,res,next); // Exécution du contrôleur et vérification des résultats attendue 
+        await todolistController.getTodoList(req,res,next); // Exécution du contrôleur et vérification des résultats attendue 
         expect(res.statusCode).toEqual(200);
         expect(res._getData()).toEqual(data);
     })
@@ -34,10 +34,18 @@ describe('Todolist controller',()=>{
             libelle: 'Sleep for 1 hour',done: false,rang: '5'
         }]
         db.todolist.create.mockResolvedValue(newTodo);
-        await insertTodoList(req,res,next);
+        await todolistController.insertTodoList(req,res,next);
         expect(db.todolist.create).toHaveBeenCalledWith({
             libelle: 'Sleep for 1 hour',done: false,rang: '5'
         });
+        expect(res.statusCode).toEqual(200);
+        expect(res._getData()).toEqual({success:true});
+    })
+    it("delete todolist with status 200",async()=>{
+        req.params = {id: '67a1beef2b664bd6f5338b15'};
+        db.todolist.deleteOne.mockResolvedValue({_id: '67a1beef2b664bd6f5338b15'});
+        await todolistController.deleteTodoList(req,res,next);
+        expect(db.todolist.deleteOne).toHaveBeenCalledWith({_id: '67a1beef2b664bd6f5338b15'});
         expect(res.statusCode).toEqual(200);
         expect(res._getData()).toEqual({success:true});
     })

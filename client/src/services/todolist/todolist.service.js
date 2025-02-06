@@ -7,6 +7,9 @@ class TodoListService{
     insertTodoList(libelle){
         return http.post('/insert-todo',{libelle});
     }
+    deleteTodoList(id){
+        return http.delete(`/delete-todo/${id}`);
+    }
 }
 
 export default new TodoListService();

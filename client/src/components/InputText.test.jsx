@@ -20,7 +20,7 @@ describe("Input text component testing", () => {
         fireEvent.change(input,{ target : { value : 'watch Mission Impossible Rogue Nation'}});
         expect(input.value).toBe('watch Mission Impossible Rogue Nation');
     });
-    it("clear input after button is clicked ",()=>{
+    it("clear input after button is clicked and send value in OnAddItem ",()=>{
         render(<MockInputText/>);
         const input = screen.getByPlaceholderText(/Nouvelle tâche/i);
         const button = screen.getByRole('button');

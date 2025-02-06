@@ -19,6 +19,10 @@ export default function Todolist() {
             });
         });
     }
+    const deleteTodoList = (id)=>{
+        setTodolist(todoList.filter((todo)=> todo._id !== id));
+        todolistService.deleteTodoList(id).then((response)=>{});
+    }
     return (
         <div className="">
             <div style={{display:'flex'}}>
@@ -41,6 +45,13 @@ export default function Todolist() {
                                 {todo.libelle}
                             </span>   
                         </div>
+                        <button 
+                            className="" 
+                            style={{marginLeft:'10px'}} 
+                            onClick={()=>deleteTodoList(todo._id)}
+                        >
+                            x
+                        </button>
                     </li>
                 )}
             </div>        

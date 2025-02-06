@@ -7,7 +7,8 @@ jest.mock("../models/model", () => ({
         find: jest.fn(),
         aggregate : jest.fn(),
         create: jest.fn(),
-        deleteOne: jest.fn()
+        deleteOne: jest.fn(),
+        updateOne: jest.fn()
     },
 }));
 
@@ -26,7 +27,7 @@ describe('Todolist controller',()=>{
         await todolistController.getTodoList(req,res,next); // Exécution du contrôleur et vérification des résultats attendue 
         expect(res.statusCode).toEqual(200);
         expect(res._getData()).toEqual(data);
-    })
+    });
     it("insert todolist with status 200",async()=>{
         req.body = {libelle: 'Sleep for 1 hour'};
         db.todolist.aggregate.mockResolvedValue([{ max : 5 }]);
@@ -40,7 +41,7 @@ describe('Todolist controller',()=>{
         });
         expect(res.statusCode).toEqual(200);
         expect(res._getData()).toEqual({success:true});
-    })
+    });
     it("delete todolist with status 200",async()=>{
         req.params = {id: '67a1beef2b664bd6f5338b15'};
         db.todolist.deleteOne.mockResolvedValue({_id: '67a1beef2b664bd6f5338b15'});
@@ -48,7 +49,20 @@ describe('Todolist controller',()=>{
         expect(db.todolist.deleteOne).toHaveBeenCalledWith({_id: '67a1beef2b664bd6f5338b15'});
         expect(res.statusCode).toEqual(200);
         expect(res._getData()).toEqual({success:true});
-    })
+    });
+    it("update checbox with status 200",async()=>{
+        req.body = {id: '67a1beef2b664bd6f5338b15',done: true};
+        db.todolist.updateOne.mockResolvedValue(    
+            { _id : '67a1beef2b664bd6f5338b15',done: true  }
+        );
+        await todolistController.updateCheckbox(req,res,next);
+        expect(db.todolist.updateOne).toHaveBeenCalledWith(
+            { _id : '67a1beef2b664bd6f5338b15' },
+            {  $set: { done: true }}
+        );
+        expect(res.statusCode).toEqual(200);
+        expect(res._getData()).toEqual({success:true});
+    });
 })
 
 

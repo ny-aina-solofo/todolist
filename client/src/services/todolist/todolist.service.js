@@ -10,6 +10,9 @@ class TodoListService{
     deleteTodoList(id){
         return http.delete(`/delete-todo/${id}`);
     }
+    updateCheckbox(id,done){
+        return http.put('/update-checkbox',{id,done});
+    }
 }
 
 export default new TodoListService();

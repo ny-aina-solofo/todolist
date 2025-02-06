@@ -14,6 +14,7 @@ const MockTodolist = () => {
     todolistService.getTodoList.mockResolvedValue({ data : todo });
     todolistService.insertTodoList.mockResolvedValue({ success : true });
     todolistService.deleteTodoList.mockResolvedValue({ success : true });
+    todolistService.updateCheckbox.mockResolvedValue({ success : true });
 	return (
         <Todolist/>
     );
@@ -43,10 +44,21 @@ describe("Todolist component testing", () => {
         await waitFor(() => {
             expect(screen.getByText("Sleep for 1 hour")).toBeInTheDocument();
         });
-        const deleteButton = screen.getAllByText('x');
-        fireEvent.click(deleteButton[0]);
+        const deleteButtons = screen.getAllByText('x');
+        fireEvent.click(deleteButtons[0]);
         expect(todolistService.deleteTodoList).toHaveBeenCalledWith("67a1beef2b664bd6f5338b15");
         expect(screen.queryByText('Sleep for 1 hour')).toBeNull(); // vérifier que l'élément n'est plus affiché dans le DOM
+    });
+
+    it("update checkbox",async()=>{
+        render(<MockTodolist/>)
+        await waitFor(() => {
+            expect(screen.getByText("Sleep for 1 hour")).toBeInTheDocument();
+        });
+        const checkboxs = screen.getAllByRole('checkbox');
+        fireEvent.click(checkboxs[0]);
+        expect(checkboxs[0].checked).toBe(true);
+        expect(todolistService.updateCheckbox).toHaveBeenCalledWith("67a1beef2b664bd6f5338b15",true);
     });
 
 });

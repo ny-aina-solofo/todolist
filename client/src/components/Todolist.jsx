@@ -1,6 +1,7 @@
 import React,{ useEffect, useState } from "react"
 import todolistService from "../services/todolist/todolist.service";
 import InputText from "./InputText";
+import Checkbox from "./Checkbox";
 
 export default function Todolist() {
     const [todoList, setTodolist] = useState([]);
@@ -23,6 +24,12 @@ export default function Todolist() {
         setTodolist(todoList.filter((todo)=> todo._id !== id));
         todolistService.deleteTodoList(id).then((response)=>{});
     }
+    const updateCheckbox = (id)=>{
+        setTodolist(todoList.map((todo) =>todo._id !== id ? todo : { ...todo, done: !todo.done }));
+        const findItem = todoList.find((todo)=> todo._id === id);
+        const done = !findItem.done
+        todolistService.updateCheckbox(id,done).then((response)=>{});
+    }
     return (
         <div className="">
             <div style={{display:'flex'}}>
@@ -40,6 +47,7 @@ export default function Todolist() {
                             backgroundColor: '#f9f9f9',
                         }}
                     >
+                        <Checkbox todo={todo} onChangeBox={updateCheckbox}/>
                         <div className="">
                             <span style={{textDecoration: todo.done ? 'line-through' : 'none'}}>
                                 {todo.libelle}

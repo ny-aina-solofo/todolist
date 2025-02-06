@@ -28,10 +28,22 @@ const deleteTodoList = async (req,res,next) => {
     res.status(200).send({success:true});    
 }
 
+const updateCheckbox = async (req,res,next) => {
+    const id_todo = req.body.id;
+    const checkdone = req.body.done;
+    await Todolist.updateOne(
+        { _id : id_todo},
+        {  $set: { done: checkdone }}
+    )
+    res.status(200).send({success:true}); 
+}
+
+
 module.exports = {
     getTodoList,
     insertTodoList,
-    deleteTodoList
+    deleteTodoList,
+    updateCheckbox
 }
 
 

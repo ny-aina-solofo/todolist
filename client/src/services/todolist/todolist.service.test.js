@@ -2,9 +2,6 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import todolistService from './todolist.service';
 import http from '../http_common';
 
-// Ne pas mocker le service lui-même !
-// vi.mock('./todolist.service');
-
 vi.mock('../http_common', () => {
     return {
         default: {
@@ -48,5 +45,13 @@ describe("http service test", () => {
         http.delete.mockResolvedValue({ success: true });
         await todolistService.deleteTodoList(_id);
         expect(http.delete).toHaveBeenCalledWith(`/delete-todo/${_id}`);
+    });
+
+    it("update checkbox", async () => {
+        const _id = '67a1beef2b664bd6f5338b15';
+        const done = true;
+        http.put.mockResolvedValue({ success: true });
+        await todolistService.updateCheckbox(_id,done);
+        expect(http.put).toHaveBeenCalledWith('/update-checkbox',{id : _id ,done : done});
     });
 });

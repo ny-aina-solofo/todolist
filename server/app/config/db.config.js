@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
-const url = "mongodb://127.0.0.1:27017/todolist"
+const dotenv = require('dotenv');
+dotenv.config();
+const url = process.env.MONGODB_CONNECTION_STRING;
 
 mongoose
     .connect(url)

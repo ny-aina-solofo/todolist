@@ -26,6 +26,7 @@ describe('Todolist controller',()=>{
         db.todolist.find.mockResolvedValue(data); // Simulation du comportement de `Todolist.find()`
         await todolistController.getTodoList(req,res,next); // Exécution du contrôleur et vérification des résultats attendue 
         expect(res.statusCode).toEqual(200);
+        expect(Array.isArray(data)).toBe(true);
         expect(res._getData()).toEqual(data);
     });
     it("insert todolist with status 200",async()=>{

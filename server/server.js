@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 const urlAPI = process.env.URL_API; 
-const portAPI = process.env.PORT_API; 
+const portAPI = process.env.PORT; 
 const corsOptions = {origin : urlAPI};
 
 app.use(cors(corsOptions)); // cors provides Express middleware to enable CORS with various options

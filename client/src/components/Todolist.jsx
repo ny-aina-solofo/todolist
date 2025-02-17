@@ -8,7 +8,7 @@ export default function Todolist() {
 
     useEffect(()=>{
         todolistService.getTodoList().then((response)=>{
-            let data = response.data; 
+            let data = response?.data || []; 
             setTodolist(data);
         })
     },[]);

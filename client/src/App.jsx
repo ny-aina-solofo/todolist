@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react"
-import Todolist from "./components/Todolist"
+import { Main } from "./components/Main/Main"
+import { TodoContextProvider } from "./context/context"
 
 // import './style.css'
 
 export default function TodoListApp() {
     return (
-        <div className="">
-            <Todolist/>
-        </div>
+        <TodoContextProvider>
+            <Main/>            
+        </TodoContextProvider>
     )
 }

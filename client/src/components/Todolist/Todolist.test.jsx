@@ -2,7 +2,7 @@ import { cleanup,render,screen, waitFor ,fireEvent} from "@testing-library/react
 import Todolist from "./Todolist";
 import  { expect,it,vi,describe,afterEach } from "vitest";
 import React from "react";
-import todolistService from "../services/todolist/todolist.service";
+import todolistService from "../../services/todolist/todolist.service";
 
 vi.mock('../services/todolist/todolist.service');
 

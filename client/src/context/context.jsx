@@ -6,14 +6,12 @@ export const TodoContext = createContext(null);
 export const TodoDispatchContext = createContext(null);
 
 export const TodoContextProvider = ({ children }) => {
-	// const [todos, dispatch] = useReducer(todoReducer,data);
 	const [todos, dispatch] = useReducer(todoReducer,[]);
 	useEffect(() => {
 		todolistService.getTodoList().then(response => {
 			dispatch({ type: 'set_data', data: response?.data || [] });
         });
     }, []);
-	// return <TodoContext.Provider value={{ todos, dispatch }}>{children}</TodoContext.Provider>;
 	return(
 		<TodoContext.Provider value={ todos }>
 			<TodoDispatchContext.Provider value={ dispatch }>

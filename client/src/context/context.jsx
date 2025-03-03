@@ -6,14 +6,17 @@ export const TodoContext = createContext(null);
 export const TodoDispatchContext = createContext(null);
 
 export const TodoContextProvider = ({ children }) => {
-	const [todos, dispatch] = useReducer(todoReducer,[]);
+	const [state, dispatch] = useReducer(todoReducer,{
+		allTodos: [],
+		filteredTodos: []
+	});
 	useEffect(() => {
 		todolistService.getTodoList().then(response => {
 			dispatch({ type: 'set_data', data: response?.data || [] });
         });
     }, []);
 	return(
-		<TodoContext.Provider value={ todos }>
+		<TodoContext.Provider value={ state.filteredTodos }>
 			<TodoDispatchContext.Provider value={ dispatch }>
 				{children}
 			</TodoDispatchContext.Provider>

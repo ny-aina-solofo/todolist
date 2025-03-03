@@ -1,14 +1,46 @@
-export const todoReducer = (todos,action) => {
+export const todoReducer = (state, action) => {
     switch (action.type) {
         case 'set_data': // Initialisation avec les données récupérées
-            return action.data;
+            return { 
+                allTodos: action.data, 
+                filteredTodos: action.data 
+            };
+
         case 'delete_item':
-            return todos.filter((todo)=> todo._id !== action.id);
+            const deleteItems = state.allTodos.filter(todo => todo._id !== action.id);
+            return { 
+                allTodos: deleteItems, 
+                filteredTodos: deleteItems 
+            };
+
         case 'update_checkbox':
-            return todos.map((todo) =>todo._id !== action.id ? todo : { ...todo, done: !todo.done });
+            const updateCheckbox = state.allTodos.map(todo => 
+                todo._id !== action.id ? todo : { ...todo, done: !todo.done }
+            );
+            return { 
+                allTodos: updateCheckbox, 
+                filteredTodos: updateCheckbox 
+            };
+
+        case 'display_all_items':
+            return { 
+                ...state, 
+                filteredTodos: state.allTodos 
+            };
+
+        case 'display_active_items':
+            return { 
+                ...state, 
+                filteredTodos: state.allTodos.filter(todo => todo.done === false) 
+            };
+
+        case 'display_completed_items':
+            return { 
+                ...state, 
+                filteredTodos: state.allTodos.filter(todo => todo.done === true) 
+            };
+
         default:
-            {
-                throw Error('Unknown action: ' + action.type);
-            }
+            throw Error('Unknown action: ' + action.type);
     }
-}
+};

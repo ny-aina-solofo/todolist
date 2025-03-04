@@ -20,7 +20,7 @@ jobs :
         # List of steps that make up the job
         steps : 
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-        -   name : Checkout code 
+        -   name : Checkout repository 
             uses : actions/checkout@v4
 
             # Install dependencies

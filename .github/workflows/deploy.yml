@@ -1,0 +1,64 @@
+# Name of workflow
+name : Production deploy
+
+# Trigger the workflow on push to the main branch
+on : 
+    push : 
+        branches : 
+            - main
+
+# List of jobs 
+# A "job" is a set of steps that are executed on the same runner
+jobs : 
+    # Name of the job
+    test-and-deploy-client : 
+        # Operating systems to run on
+        runs-on : ubuntu-latest
+        defaults:
+            run :
+            working-directory : client  
+        # List of steps that make up the job
+        steps : 
+            # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        -   name : Checkout code 
+            uses : actions/checkout@v2
+
+            # Install dependencies
+        -   name : Install dependencies
+            run : npm install
+
+            # Run tests
+        -   name : Run tests
+            run : npm test
+            
+            # Build
+        -   name : Run build
+            run : npm run build
+
+            # Deploy on render
+        -   name : Deploy client on Render
+            run : curl -X "$RENDER_CLIENT_DEPLOY_HOOK"
+            env :
+                RENDER_CLIENT_DEPLOY_HOOK: ${{ secrets.RENDER_CLIENT_DEPLOY_HOOK }} 
+
+    test-and-deploy-server:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: server  
+
+    steps:
+        -   name: Checkout repository
+            uses: actions/checkout@v4
+
+        -   name: Install dependencies
+            run: npm install
+
+        -   name: Run server tests
+            run: npm test
+
+        -   name: Deploy Server to Render
+            run: curl -X POST "$RENDER_SERVER_DEPLOY_HOOK"
+            env:
+                RENDER_SERVER_DEPLOY_HOOK: ${{ secrets.RENDER_SERVER_DEPLOY_HOOK }}
+

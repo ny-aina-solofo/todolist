@@ -6,5 +6,6 @@ router.get('/get-todo',todolistController.getTodoList);
 router.post('/insert-todo',todolistController.insertTodoList);
 router.delete('/delete-todo/:id',todolistController.deleteTodoList);
 router.put('/update-checkbox',todolistController.updateCheckbox);
+router.put('/update-order',todolistController.updateTodoListOrder);
 
 module.exports = router;

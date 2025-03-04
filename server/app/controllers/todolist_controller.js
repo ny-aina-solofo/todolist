@@ -2,7 +2,10 @@ const db = require('../models/model');
 const Todolist = db.todolist;
 
 const getTodoList = async (req,res,next) => {
-    const result = await Todolist.find();
+    const result = await Todolist.find({}, { _id: 1, libelle: 1, done: 1, rang: 1 })
+        .sort({ rang: 1 })
+        .lean()
+        .then(docs => docs.map(doc => ({ ...doc, rang: parseInt(doc.rang, 10) })));
     if (Object.keys(result).length > 0) res.status(200).send(result);
     else res.status(200).send();    
 }
@@ -38,12 +41,23 @@ const updateCheckbox = async (req,res,next) => {
     res.status(200).send({success:true}); 
 }
 
+const updateTodoListOrder = async function (req,res,next) {
+    const updatedList = req.body.updatedList;
+    for (const key of updatedList) {
+        await Todolist.updateOne(
+            { _id : key._id},
+            { $set : { rang : key.rang }}
+        )
+    }
+    res.status(200).send({success:true});
+}
 
 module.exports = {
     getTodoList,
     insertTodoList,
     deleteTodoList,
-    updateCheckbox
+    updateCheckbox,
+    updateTodoListOrder
 }
 
 

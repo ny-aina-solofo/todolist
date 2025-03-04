@@ -9,11 +9,6 @@ export const Todo = ({todo}) => {
         dispatch({ type: 'delete_item', id : id });
         todolistService.deleteTodoList(id).then((response)=>{});
     }
-    const updateCheckbox = (id)=>{
-        dispatch({ type: 'update_checkbox', id : id });
-        const done = !todo.done;
-        todolistService.updateCheckbox(id,done).then((response)=>{});
-    }
     return (
         <div 
             style={{
@@ -25,7 +20,7 @@ export const Todo = ({todo}) => {
                 backgroundColor: '#f9f9f9',
             }}
         >
-            <Checkbox todo={todo} onChangeBox={updateCheckbox}/>
+            <Checkbox todo={todo}/>
             <div className="">
                 <span style={{textDecoration: todo.done ? 'line-through' : 'none'}}>
                     {todo.libelle}

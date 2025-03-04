@@ -54,4 +54,15 @@ describe("http service test", () => {
         await todolistService.updateCheckbox(_id,done);
         expect(http.put).toHaveBeenCalledWith('/update-checkbox',{id : _id ,done : done});
     });
+    it("update list order", async () => {
+        const updatedList = [{
+            _id: '67a1beef2b664bd6f5338b15',
+            libelle: 'Sleep for 1 hour',
+            done: false,
+            rang: '1'            
+        }];
+        http.put.mockResolvedValue({ success: true });
+        await todolistService.updateTodoListOrder(updatedList);
+        expect(http.put).toHaveBeenCalledWith('/update-order',{updatedList : updatedList});
+    });
 });

@@ -14,8 +14,8 @@ const mockDispatch = vi.fn();
 useTodoDispatch.mockReturnValue(mockDispatch);
 
 const todo = [
-    {_id: '67a1beef2b664bd6f5338b15',libelle: 'Sleep for 1 hour',done: false,rang: '1',__v: 0},
-    {_id: '67a1beef2b664bd6f5338b16',libelle: 'Learn TDD',done: false,rang: '2',__v: 0}
+    {_id: '67a1beef2b664bd6f5338b15',libelle: 'Sleep for 1 hour',done: false,rang: 1,__v: 0},
+    {_id: '67a1beef2b664bd6f5338b16',libelle: 'Learn TDD',done: false,rang: 2,__v: 0}
 ]
 const MockTodo = () => {
     todolistService.getTodoList.mockResolvedValue({ data : todo });

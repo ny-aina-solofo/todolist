@@ -21,10 +21,14 @@ describe('Todolist controller',()=>{
     it("get todolist with status 200",async()=>{
         const data = [{
             _id: '67a1beef2b664bd6f5338b15', libelle: 'Sleep for 1 hour',
-            done: false, rang: '1',__v: 0
+            done: false, rang: 1,__v: 0
         }]
-        db.todolist.find.mockResolvedValue(data); // Simulation du comportement de `Todolist.find()`
-        await todolistController.getTodoList(req,res,next); // Exécution du contrôleur et vérification des résultats attendue 
+        db.todolist.find.mockReturnValue({
+            sort: jest.fn().mockReturnValue({
+                lean: jest.fn().mockResolvedValue(data)
+            })
+        }); 
+        await todolistController.getTodoList(req,res,next); // Exécution du contrôleur 
         expect(res.statusCode).toEqual(200);
         expect(Array.isArray(data)).toBe(true);
         expect(res._getData()).toEqual(data);
@@ -60,6 +64,23 @@ describe('Todolist controller',()=>{
         expect(db.todolist.updateOne).toHaveBeenCalledWith(
             { _id : '67a1beef2b664bd6f5338b15' },
             {  $set: { done: true }}
+        );
+        expect(res.statusCode).toEqual(200);
+        expect(res._getData()).toEqual({success:true});
+    });
+    it("update list order with status 200",async()=>{
+        req.body = {
+            updatedList: [
+                { _id: '67a1beef2b664bd6f5338b15', rang: '5' }
+            ]
+        };
+        db.todolist.updateOne.mockResolvedValue(    
+            { _id : '67a1beef2b664bd6f5338b15',rang : '5'  }
+        );
+        await todolistController.updateTodoListOrder(req,res,next);
+        expect(db.todolist.updateOne).toHaveBeenCalledWith(
+            { _id : '67a1beef2b664bd6f5338b15' },
+            {  $set: { rang : '5' }}
         );
         expect(res.statusCode).toEqual(200);
         expect(res._getData()).toEqual({success:true});

@@ -1,3 +1,5 @@
+import { act } from "react";
+
 export const todoReducer = (state, action) => {
     switch (action.type) {
         case 'set_data': // Initialisation avec les données récupérées
@@ -39,7 +41,11 @@ export const todoReducer = (state, action) => {
                 ...state, 
                 filteredTodos: state.allTodos.filter(todo => todo.done === true) 
             };
-
+        case 'drag_and_drop':
+            return { 
+                allTodos: action.updatedList, 
+                filteredTodos: action.updatedList 
+            };
         default:
             throw Error('Unknown action: ' + action.type);
     }

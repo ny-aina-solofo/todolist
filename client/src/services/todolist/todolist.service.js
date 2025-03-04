@@ -13,6 +13,9 @@ class TodoListService{
     updateCheckbox(id,done){
         return http.put('/update-checkbox',{id,done});
     }
+    updateTodoListOrder(updatedList){
+        return http.put('/update-order',{updatedList});
+    }
 }
 
 export default new TodoListService();

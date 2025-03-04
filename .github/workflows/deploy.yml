@@ -16,11 +16,11 @@ jobs :
         runs-on : ubuntu-latest
         defaults:
             run :
-            working-directory : client  
+                working-directory : client  
         # List of steps that make up the job
         steps : 
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-        -   name : Checkout repository 
+        -   name : Checkout code 
             uses : actions/checkout@v4
 
             # Install dependencies
@@ -37,7 +37,7 @@ jobs :
 
             # Deploy on render
         -   name : Deploy client on Render
-            run : curl -X "$RENDER_CLIENT_DEPLOY_HOOK"
+            run : curl -X POST "$RENDER_CLIENT_DEPLOY_HOOK"
             env :
                 RENDER_CLIENT_DEPLOY_HOOK: ${{ secrets.RENDER_CLIENT_DEPLOY_HOOK }} 
 
@@ -47,7 +47,7 @@ jobs :
             run:
                 working-directory: server  
 
-    steps:
+        steps:
         -   name: Checkout repository
             uses: actions/checkout@v4
 

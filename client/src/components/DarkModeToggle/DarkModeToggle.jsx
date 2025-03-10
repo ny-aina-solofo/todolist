@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import iconMoon from '../../assets/icon-moon.svg';
 import iconSun from '../../assets/icon-sun.svg';
 
@@ -6,7 +6,7 @@ export const DarkModeToggle = () => {
     const [isDarkMode, setIsDarkMode] = useState(() => {
         return localStorage.getItem('theme') === 'dark';
     });
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (isDarkMode) {
             document.body.classList.add('dark');
         } else {

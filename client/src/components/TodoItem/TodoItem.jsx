@@ -3,7 +3,7 @@ import { useTodoDispatch } from "../../context/context";
 import todolistService from "../../services/todolist/todolist.service";
 import Checkbox from "../Checkbox/Checkbox";
 
-export const Todo = ({todo}) => {
+export const TodoItem = ({todo}) => {
     const dispatch = useTodoDispatch();
     const deleteTodoList = (id)=>{
         dispatch({ type: 'delete_item', id : id });

@@ -1,7 +1,7 @@
 import { cleanup, render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { beforeEach, expect, it, vi, describe, afterEach } from "vitest";
 import React from "react";
-import { Todo } from "./Todo";
+import { TodoItem } from "./TodoItem";
 import { TodoContextProvider, useTodoDispatch } from "../../context/context";
 import todolistService from "../../services/todolist/todolist.service";
 
@@ -22,7 +22,7 @@ const MockTodo = () => {
     todolistService.deleteTodoList.mockResolvedValue({ success : true });
     todolistService.updateCheckbox.mockResolvedValue({ success : true });
 	return (
-        <Todo todo={todo}/>
+        <TodoItem todo={todo}/>
     );
 };
 

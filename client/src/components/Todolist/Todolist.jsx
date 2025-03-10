@@ -1,5 +1,5 @@
 import React,{ useContext, useEffect, useState} from "react"
-import { Todo } from "../Todo/Todo";
+import { TodoItem } from "../TodoItem/TodoItem";
 import { useTodo ,useTodoDispatch } from "../../context/context";
 import todolistService from "../../services/todolist/todolist.service";
 
@@ -35,7 +35,7 @@ export default function Todolist() {
                         onDrop={()=>drop(index)}
                         style={{ opacity: draggedTodo === index ? 0.5 : 1, cursor:'move' }}
                     >
-                        <Todo todo={todo}/>
+                        <TodoItem todo={todo}/>
                     </li>
                 )}
             </div>        

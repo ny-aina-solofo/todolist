@@ -1,5 +1,3 @@
-import { act } from "react";
-
 export const todoReducer = (state, action) => {
     switch (action.type) {
         case 'set_data': // Initialisation avec les données récupérées

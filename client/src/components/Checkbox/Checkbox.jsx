@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import todolistService from "../../services/todolist/todolist.service";
 import { useTodoDispatch } from "../../context/context";
-import iconCheck from '../../assets/icon-check.svg';
 
 export default function Checkbox({todo}) { 
     const dispatch = useTodoDispatch();

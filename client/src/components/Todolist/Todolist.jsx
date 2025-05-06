@@ -36,7 +36,7 @@ export default function Todolist() {
                             onDrop={()=>drop(index)}
                             className={`
                                 list-none cursor-move transition-all duration-200 ease-in-out 
-                                hover:bg-white dark:hover:bg-Dark-Very-Dark-Grayish-Blue
+                                hover:bg-Light-Very-Light-Grayish-Blue dark:hover:bg-Light-Dark-Grayish-Blue
                                 ${draggedTodo === index ? 'opacity-50 scale-95 ring-2 ring-blue-400' : ''}
                             `}
                         >

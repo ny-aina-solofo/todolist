@@ -25,20 +25,31 @@ export default function Todolist() {
     }
 
     return (
-        <div className="">            
-            <div className="" style={{width:'450px',marginTop:'20px'}}>
-                {todolist.map( (todo,index) =>
-                    <li 
-                        key={todo._id} draggable  
-                        onDragStart={()=>dragStart(index)}
-                        onDragOver={dragOver}
-                        onDrop={()=>drop(index)}
-                        style={{ opacity: draggedTodo === index ? 0.5 : 1, cursor:'move' }}
-                    >
-                        <TodoItem todo={todo}/>
-                    </li>
-                )}
-            </div>        
+        <div className="bg-white rounded-t-md dark:bg-Dark-Very-Dark-Desaturated-Blue shadow-2xl">            
+            {todolist.length > 0 ? (
+                <div>
+                    {todolist.map( (todo,index) =>
+                        <li 
+                            key={todo._id} draggable  
+                            onDragStart={()=>dragStart(index)}
+                            onDragOver={dragOver}
+                            onDrop={()=>drop(index)}
+                            className={`
+                                list-none cursor-move transition-all duration-200 ease-in-out 
+                                hover:bg-white dark:hover:bg-Dark-Very-Dark-Grayish-Blue
+                                ${draggedTodo === index ? 'opacity-50 scale-95 ring-2 ring-blue-400' : ''}
+                            `}
+                        >
+                            <TodoItem todo={todo}/>
+                        </li>
+                    )}
+                </div>
+            ) : (
+                <p className="text-center text-sm text-Light-Dark-Grayish-Blue 
+                dark:text-Dark-Very-Dark-Grayish-Blue">
+                    liste vide
+                </p>
+            )}
         </div>
     )
 }

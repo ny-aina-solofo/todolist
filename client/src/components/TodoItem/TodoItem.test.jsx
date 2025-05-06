@@ -39,7 +39,7 @@ describe("Todo component tests", () => {
     
     it("delete todolist", async () => {
         render(<MockTodo/>)
-        const deleteButtons = screen.getAllByText('x');
+        const deleteButtons = screen.getAllByRole('img');
         fireEvent.click(deleteButtons[0]);
         expect(mockDispatch).toHaveBeenCalledWith({ type: "delete_item", id: todo._id });
         expect(todolistService.deleteTodoList).toHaveBeenCalledWith(todo._id);

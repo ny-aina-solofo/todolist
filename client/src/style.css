@@ -1,16 +1,32 @@
-/* :root {
-	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-	line-height: 1.5;
-	font-weight: 400;
-	
-	font-synthesis: none;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
- */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+@import "tailwindcss";
 
-.dark {
-	color: #dcdcdc;
-	background-color: #292929; 
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--font-josefin:'Josefin Sans';
+
+	/* Light Theme */
+	--color-Light-Very-Light-Gray: hsl(0, 0%, 98%);
+	--color-Light-Very-Light-Grayish-Blue: hsl(236, 33%, 92%);
+	--color-Light-Light-Grayish-Blue: hsl(233, 11%, 84%);
+	--color-Light-Dark-Grayish-Blue: hsl(236, 9%, 61%);
+	--color-Light-Very-Dark-Grayish-Blue: hsl(235, 19%, 35%);
+	
+	/*Dark Theme */
+	--color-Dark-Very-Dark-Blue: hsl(235, 21%, 11%);
+	--color-Dark-Very-Dark-Desaturated-Blue: hsl(235, 24%, 19%);
+	--color-Dark-Light-Grayish-Blue: hsl(234, 39%, 85%);
+	--color-Dark-Light-Grayish-Blue-hover : hsl(236, 33%, 92%);
+	--color-Dark-Dark-Grayish-Blue: hsl(234, 11%, 52%);
+	--color-Dark-Very-Dark-Grayish-Blue: hsl(233, 14%, 35%);
+	--color-Dark-High-Very-Dark-Grayish-Blue: hsl(237, 14%, 26%);
+
+	--color-Bright-Blue:hsl(220, 98%, 61%);
+	--color-gradient-start: hsl(192, 100%, 67%);
+    --color-gradient-end: hsl(280, 87%, 65%);
 }
+
+
+
+

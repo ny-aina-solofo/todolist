@@ -17,7 +17,7 @@ export default function Form() {
         setInputValue('');
     } 
     return(
-        <form
+        <div
             className="
                 mb-4 sm:mb-6 flex shadow-2xl items-center justify-between border-none 
                 bg-white rounded-md flex items-center w-full p-2 sm:p-3
@@ -54,6 +54,6 @@ export default function Form() {
             >
                 Ajouter
             </button>
-        </form>
+        </div>
     )
 }

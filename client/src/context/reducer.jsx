@@ -39,6 +39,12 @@ export const todoReducer = (state, action) => {
                 ...state, 
                 filteredTodos: state.allTodos.filter(todo => todo.done === true) 
             };
+        case 'clear_completed_items':
+            const clearCompletedList = state.allTodos.filter(todo => todo.done === false);
+            return { 
+                allTodos: clearCompletedList, 
+                filteredTodos: clearCompletedList 
+            };
         case 'drag_and_drop':
             return { 
                 allTodos: action.updatedList, 

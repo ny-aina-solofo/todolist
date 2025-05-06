@@ -6,11 +6,12 @@ export const DarkModeToggle = () => {
     const [isDarkMode, setIsDarkMode] = useState(() => {
         return localStorage.getItem('theme') === 'dark';
     });
+    const root = document.documentElement; // <html>
     useLayoutEffect(() => {
         if (isDarkMode) {
-            document.body.classList.add('dark');
+            root.classList.add('dark');
         } else {
-            document.body.classList.remove('dark');
+            root.classList.remove('dark');
         }
     }, [isDarkMode]);
 
@@ -18,24 +19,25 @@ export const DarkModeToggle = () => {
         const newIsDarkMode = !isDarkMode;
         setIsDarkMode(newIsDarkMode);
         if (newIsDarkMode) {
-            document.body.classList.add('dark');
+            root.classList.add('dark');
             localStorage.setItem('theme', 'dark');
         } else {
-            document.body.classList.remove('dark');
+            root.classList.remove('dark');
             localStorage.removeItem('theme');
         }
     };
     return (
-        <div style={{marginLeft :'30px'}}>
-            <button type="button" onClick={handleDarkMode}>
+        <div>
+            <div className='cursor-pointer' type="button" onClick={handleDarkMode}>
                 {
                     isDarkMode ? 
                     (
                         <img src={iconSun}/>
                     ) : (
                         <img src={iconMoon}/>
-                    )}
-            </button>
+                    )
+                }
+            </div>
         </div>
     )
 }

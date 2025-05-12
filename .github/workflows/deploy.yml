@@ -6,11 +6,6 @@ on :
     push : 
         branches : 
             - main
-        paths:
-            - 'web/**'
-            - 'server/**'
-        paths-ignore :
-            - 'cli/**'
 
 # List of jobs 
 # A "job" is a set of steps that are executed on the same runner

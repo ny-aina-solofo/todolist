@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import todolistService from "../../services/todolist/todolist.service";
 import { useTodoDispatch } from "../../context/context";
-import iconCheck from '../../assets/icon-check.svg';
 
 export default function Checkbox({todo}) { 
     const dispatch = useTodoDispatch();
@@ -21,12 +20,11 @@ export default function Checkbox({todo}) {
                 type="checkbox"
                 checked={todo.done}
                 onChange={() => updateCheckbox(todo._id)}
-                style={todo.done ? { backgroundImage: `url(${iconCheck})` } : {}}
                 className={`
                     w-4 h-4 box-content appearance-none outline-none 
                     ${todo.done ? "border-none" : "border-2"}
                     ${todo.done ? 
-                        "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-no-repeat bg-center" 
+                        "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-no-repeat bg-center bg-[url('assets/icon-check.svg')]" 
                         : 
                         "bg-white dark:bg-Dark-Very-Dark-Desaturated-Blue"
                     }

@@ -22,13 +22,13 @@ afterEach(cleanup);
 describe("Input text component testing", () => {
     it("verify input has correct value",()=>{
         render(<MockForm/>);
-        const input = screen.getByPlaceholderText(/Nouvelle tâche/i);
+        const input = screen.getByPlaceholderText(/e.g build todo app/i);
         fireEvent.change(input,{ target : { value : 'watch Mission Impossible Rogue Nation'}});
         expect(input.value).toBe('watch Mission Impossible Rogue Nation');
     });
     it("clear input after button is clicked",()=>{
         render(<MockForm/>);
-        const input = screen.getByPlaceholderText(/Nouvelle tâche/i);
+        const input = screen.getByPlaceholderText(/e.g build todo app/i);
         const button = screen.getByRole('button');
         fireEvent.change(input,{ target : { value : 'watch Mission Impossible Rogue Nation'}});
         expect(input.value).toBe("watch Mission Impossible Rogue Nation");
@@ -37,7 +37,7 @@ describe("Input text component testing", () => {
     });
     it("add todolist",async()=>{
         render(<MockForm/>);
-        const input = screen.getByPlaceholderText(/Nouvelle tâche/i);
+        const input = screen.getByPlaceholderText(/e.g build todo app/i);
         const button = screen.getByRole('button');
         fireEvent.change(input,{ target : { value : 'watch Mission Impossible Rogue Nation'}});
         expect(input.value).toBe("watch Mission Impossible Rogue Nation");

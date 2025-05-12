@@ -33,7 +33,7 @@ export default function Form() {
                         dark:text-Dark-Light-Grayish-Blue
                         dark:placeholder:text-Dark-Very-Dark-Grayish-Blue 
                     "
-                    placeholder="Nouvelle tâche" 
+                    placeholder="e.g build todo app" 
                     value={inputValue} 
                     onChange={(e)=> {
                         e.preventDefault();
@@ -52,7 +52,7 @@ export default function Form() {
                 " 
                 onClick={addTodoList}
             >
-                Ajouter
+                Add
             </button>
         </form>
     )
